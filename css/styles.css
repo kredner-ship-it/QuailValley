@@ -450,37 +450,50 @@ button { font: inherit; }
   margin-top: var(--space-1);
 }
 
-/* Events list (names only — dates announced closer to each event) */
-.event-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* Events grid — each card reserves a flyer-shaped slot (image goes in
+   .event-card__media once flyers are available; placeholder shows until then) */
+.event-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
 }
-.event-list li {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+.event-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
-.event-list .event-icon {
-  flex: none;
-  display: inline-flex;
+.event-card__media {
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(150deg, var(--cream), #ddd1bd);
+  border-bottom: 1px dashed var(--taupe);
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--cream);
-  color: var(--maroon-700);
+  gap: var(--space-1);
+  color: var(--taupe);
+  text-align: center;
+  padding: var(--space-2);
 }
-.event-list span:last-child { font-weight: 600; color: var(--navy-900); }
+.event-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.event-card__media span { font-size: 0.78rem; }
+.event-card__name {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--navy-900);
+  padding: var(--space-2) var(--space-2);
+  margin: 0;
+  text-align: center;
+}
 
 /* Leadership */
 .leadership {
@@ -652,7 +665,7 @@ button { font: inherit; }
   .split-media { order: -1; }
 
   .cards-2 { grid-template-columns: 1fr; }
-  .event-list { grid-template-columns: 1fr; }
+  .event-grid { grid-template-columns: repeat(2, 1fr); }
   .leadership { grid-template-columns: 1fr; text-align: center; justify-items: center; }
 
   .newsletter-inner { grid-template-columns: 1fr; }
